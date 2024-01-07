@@ -20,6 +20,7 @@ echo "Syncthing installed successfully."
 
 # Activate autostart
 echo "Enabling Syncthing autostart..."
+
 file_path="/etc/systemd/system/syncthing@.service"
 text_to_write="[Unit]
 Description=Syncthing - Open Source Continuous File Synchronization for %I
@@ -46,6 +47,7 @@ echo "$text_to_write" > "$file_path"
 
 sudo systemctl daemon-reload
 
+sudo systemctl unmask syncthing@.service
 sudo systemctl enable syncthing@administrator.service
 sudo systemctl start syncthing@administrator.service
-echo "Syncthing autostart enabled and started for 'myuser'."
+echo "Syncthing autostart enabled and started."
