@@ -38,7 +38,7 @@ WantedBy=multi-user.target
 
 # Check if the file exists, if not, create it
 if [ ! -f "$file_path" ]; then
-    touch "$file_path"
+    sudo touch "$file_path"
 fi
 
 # Write text to the file
