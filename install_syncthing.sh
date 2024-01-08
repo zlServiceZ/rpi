@@ -19,18 +19,15 @@ sudo apt-get install syncthing
 echo "Syncthing installed successfully."
 
 echo "Creating config files."
-# Ausführen von Syncthing im Hintergrund
+# Führe den Befehl aus und warte 10 Sekunden, bevor das STRG+C-Signal gesendet wird
 syncthing --home "$HOME/.config/syncthing" &
+PID=$! # Speichere die Prozess-ID von Syncthing
 
-# Warte 10 Sekunden
+echo "Waiting for 10 seconds before sending SIGINT..."
 sleep 10
 
-# Beenden von Syncthing
-pkill syncthing
-
-# Fortsetzen mit dem Skript
-echo "Continuing with the script..."
-
+# Sende das STRG+C-Signal an den Syncthing-Prozess
+kill -SIGINT $PID
 
 # Activate autostart
 echo "Enabling Syncthing autostart..."
