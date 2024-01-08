@@ -1,9 +1,9 @@
-Installation Script for [Syncthing](https://syncthing.net/)
+# Installation Script for [Syncthing](https://syncthing.net/)
 
-Execute:
-git clone https://github.com/zlServiceZ/rpi.git
-chmod +x rpi/install_syncthing.sh
-rpi/install_syncthing.sh
+### Execute: 
+git clone https://github.com/zlServiceZ/rpi.git  
+chmod +x rpi/install_syncthing.sh  
+rpi/install_syncthing.sh  
 
-URL:
+### URL:
 localhost:8384
