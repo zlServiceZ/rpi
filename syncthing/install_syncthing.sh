@@ -38,4 +38,4 @@ echo "Created config files successfully"
 echo "Syncthing is running on localhost:8384"
 
 # reboot is necessary
-source ../tools/restart.sh
+source "$HOME/rpi/tools/restart.sh"

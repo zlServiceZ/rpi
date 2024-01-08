@@ -6,10 +6,9 @@ sudo apt upgrade -y
 sudo apt install unbound
 
 # Festlegen des Pfads zur Zieldatei
-target_file="/etc/unbound/unbound.conf.d/pi-hole.conf"
 
 # Die Konfigurationsinformationen in die Zieldatei schreiben oder anhängen
-sudo cat <<EOF > "$target_file"
+cat <<EOF > "/etc/unbound/unbound.conf.d/pi-hole.conf"
 server:
     # If no logfile is specified, syslog is used
     # logfile: "/var/log/unbound/unbound.log"
