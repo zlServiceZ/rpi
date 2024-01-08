@@ -8,7 +8,7 @@
 ### Execute: 
 git clone https://github.com/zlServiceZ/rpi.git  
 chmod +x rpi/syncthing/install_syncthing.sh  
-rpi/install_syncthing.sh  
+rpi/syncthing/install_syncthing.sh  
 
 ### URL:
 localhost:8384
@@ -18,7 +18,7 @@ localhost:8384
 ### Execute: 
 git clone https://github.com/zlServiceZ/rpi.git  
 chmod +x rpi/unbound/install_unbound.sh  
-rpi/install_syncthing.sh  
+rpi/unbound/install_unbound.sh  
 
 ### URL:
 localhost:8384

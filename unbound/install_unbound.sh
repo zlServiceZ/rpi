@@ -9,7 +9,7 @@ sudo apt install unbound
 target_file="/etc/unbound/unbound.conf.d/pi-hole.conf"
 
 # Die Konfigurationsinformationen in die Zieldatei schreiben oder anhängen
-cat <<EOF > "$target_file"
+sudo cat <<EOF > "$target_file"
 server:
     # If no logfile is specified, syslog is used
     # logfile: "/var/log/unbound/unbound.log"
@@ -42,4 +42,4 @@ fi
 
 
 # reboot is necessary
-source ../tools/restart.sh
+source "$HOME/rpi/tools/restart.sh"
