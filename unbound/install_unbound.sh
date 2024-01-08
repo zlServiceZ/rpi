@@ -29,6 +29,10 @@ server:
     private-address: fe80::/10
 EOF'
 
+echo "edns-packet-max=1232" | sudo tee -a /etc/dnsmasq.d/99-edns.conf
+
+sudo service unbound restart
+
 # Überprüfen, ob das Schreiben erfolgreich war
 if [ $? -eq 0 ]; then
     echo "Konfigurationsdatei wurde erfolgreich erstellt."
