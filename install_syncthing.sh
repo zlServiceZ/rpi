@@ -33,7 +33,7 @@ sleep 2
 
 # Make GUI available
 # File name
-file="path/to/your/file.txt"
+file="$HOME/.config/syncthing/config.xml"
 
 # Search pattern and replacement
 old_address="127.0.0.1:8384"
