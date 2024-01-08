@@ -6,7 +6,7 @@ sudo apt upgrade -y
 sudo apt install unbound -y
 
 # Erstellen der Konfigurationsdatei als Root-Benutzer
-sudo bash -c 'cat <<EOF > /etc/unbound/unbound.conf.d/pi-hole.conf
+sudo bash -c 'cat <<EOF > /etc/unbound/unbound.conf.d/pihole.conf
 server:
     # If no logfile is specified, syslog is used
     # logfile: "/var/log/unbound/unbound.log"

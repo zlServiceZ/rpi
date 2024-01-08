@@ -24,4 +24,11 @@ Finally, configure Pi-hole to use your recursive DNS server by specifying 127.0.
 
 ---
 
+### Execute: 
+git clone https://github.com/zlServiceZ/rpi.git  
+chmod +x rpi/pihole/install_pihole.sh  
+rpi/pihole/install_pihole.sh 
+
+---
+
 
