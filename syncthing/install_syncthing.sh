@@ -36,15 +36,5 @@ sleep 2
 sed -i 's#<address>127.0.0.1:[0-9]\{3,5\}</address>#<address>0.0.0.0:8384</address>#' "$HOME/.config/syncthing/config.xml"
 echo "Created config files successfully"
 
-# reboot necessary
-echo "Do you want to reboot the system now? (Y/N)"
-read choice
-
-if [[ $choice == "Y" || $choice == "y" ]]; then
-    echo "Rebooting the system..."
-    sudo reboot
-elif [[ $choice == "N" || $choice == "n" ]]; then
-    echo "Skipping reboot. Please reboot manually when ready."
-else
-    echo "Invalid choice. Please enter Y/y or N/n."
-fi
+# reboot is necessary
+source ../tools/restart.sh
