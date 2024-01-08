@@ -29,7 +29,15 @@ server:
     private-address: fe80::/10
 EOF'
 
-echo "edns-packet-max=1232" | sudo tee -a /etc/dnsmasq.d/99-edns.conf
+# signal FTL to adhere to this limit.
+if grep -qxF 'edns-packet-max=1232' /etc/dnsmasq.d/99-edns.conf; then
+    echo "Der Eintrag edns-packet-max=1232 existiert bereits in der Datei."
+else
+    echo "Der Eintrag edns-packet-max=1232 existiert nicht in der Datei."
+    # Hinzufügen des Eintrags, falls er noch nicht existiert
+    echo "edns-packet-max=1232" | sudo tee -a /etc/dnsmasq.d/99-edns.conf
+fi
+
 
 sudo service unbound restart
 
