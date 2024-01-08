@@ -32,15 +32,8 @@ pkill syncthing
 sleep 2
 
 # Make GUI available
-# File name
-file="$HOME/.config/syncthing/config.xml"
-
-# Search pattern and replacement
-old_address="127.0.0.1:*"
-new_address="0.0.0.0:34313"
-
 # Use sed to replace the search pattern
-sed -i "s|<address>$old_address</address>|<address>$new_address</address>|g" "$file"
+sed -i "s/<address>127.0.0.1:*</address>/<address>0.0.0.0:8384</address>/" "$HOME/.config/syncthing/config.xml"
 echo "Created config files successfully"
 
 # reboot necessary
