@@ -33,7 +33,7 @@ sleep 2
 
 # Make GUI available
 # Use sed to replace the search pattern
-sed -i "s/<address>127.0.0.1:*</address>/<address>0.0.0.0:8384</address>/" "$HOME/.config/syncthing/config.xml"
+sed -i 's#<address>127.0.0.1:[0-9]\{3,5\}</address>#<address>0.0.0.0:8384</address>#' "$HOME/.config/syncthing/config.xml"
 echo "Created config files successfully"
 
 # reboot necessary
