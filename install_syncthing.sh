@@ -18,6 +18,20 @@ echo "Installing Syncthing..."
 sudo apt-get install syncthing
 echo "Syncthing installed successfully."
 
+echo "Creating config files."
+# Ausführen von Syncthing im Hintergrund
+syncthing --home "$HOME/.config/syncthing" &
+
+# Warte 10 Sekunden
+sleep 10
+
+# Beenden von Syncthing
+pkill syncthing
+
+# Fortsetzen mit dem Skript
+echo "Continuing with the script..."
+
+
 # Activate autostart
 echo "Enabling Syncthing autostart..."
 
@@ -47,7 +61,6 @@ echo "$text_to_write" > "$file_path"
 
 sudo systemctl daemon-reload
 
-sudo systemctl unmask syncthing@.service
 sudo systemctl enable syncthing@administrator.service
 sudo systemctl start syncthing@administrator.service
 echo "Syncthing autostart enabled and started."
