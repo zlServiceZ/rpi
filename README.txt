@@ -2,4 +2,4 @@ git clone https://github.com/zlServiceZ/rpi.git
 
 # Execute script
 chmod +x rpi/install_syncthing.sh
-rpi//install_syncthing.sh
+rpi/install_syncthing.sh

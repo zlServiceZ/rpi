@@ -36,8 +36,8 @@ sleep 2
 file="$HOME/.config/syncthing/config.xml"
 
 # Search pattern and replacement
-old_address="127.0.0.1:8384"
-new_address="0.0.0.0:8384"
+old_address="127.0.0.1:34313"
+new_address="0.0.0.0:34313"
 
 # Use sed to replace the search pattern
 sed -i "s|<address>$old_address</address>|<address>$new_address</address>|g" "$file"
