@@ -29,6 +29,8 @@ sleep 10
 # Stopping Syncthing
 pkill syncthing
 
+sleep 2
+
 # Make GUI available
 # File name
 file="path/to/your/file.txt"
