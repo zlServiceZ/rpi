@@ -1,14 +1,12 @@
 #!/bin/bash
 
+# Paketaktualisierung und Installation von Unbound
 sudo apt update
 sudo apt upgrade -y
+sudo apt install unbound -y
 
-sudo apt install unbound
-
-# Festlegen des Pfads zur Zieldatei
-
-# Die Konfigurationsinformationen in die Zieldatei schreiben oder anhängen
-cat <<EOF > "/etc/unbound/unbound.conf.d/pi-hole.conf"
+# Erstellen der Konfigurationsdatei als Root-Benutzer
+sudo bash -c 'cat <<EOF > /etc/unbound/unbound.conf.d/pi-hole.conf
 server:
     # If no logfile is specified, syslog is used
     # logfile: "/var/log/unbound/unbound.log"
@@ -29,16 +27,14 @@ server:
     private-address: 10.0.0.0/8
     private-address: fd00::/8
     private-address: fe80::/10
-EOF
+EOF'
 
 # Überprüfen, ob das Schreiben erfolgreich war
 if [ $? -eq 0 ]; then
-    echo "Konfigurationsdatei wurde erfolgreich unter $target_file erstellt."
+    echo "Konfigurationsdatei wurde erfolgreich erstellt."
 else
     echo "Fehler beim Erstellen der Konfigurationsdatei."
 fi
 
-
-
-# reboot is necessary
+# Neustart
 source "$HOME/rpi/tools/restart.sh"
