@@ -47,6 +47,3 @@ if [ $? -eq 0 ]; then
 else
     echo "Fehler beim Erstellen der Konfigurationsdatei."
 fi
-
-# Neustart
-source "$HOME/rpi/tools/restart.sh"
