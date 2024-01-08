@@ -13,50 +13,30 @@ echo "Syncthing 'stable' channel added to APT sources."
 
 # Update and install Syncthing:
 echo "Updating APT repositories..."
-sudo apt-get update
+sudo apt update
 echo "Installing Syncthing..."
-sudo apt-get install syncthing
+sudo apt install syncthing
 echo "Syncthing installed successfully."
 
 echo "Creating config files."
-# Ausführen von Syncthing im Hintergrund
+
+# Running Syncthing in the background
 syncthing --home "$HOME/.config/syncthing" &
 
-# Warte 10 Sekunden
+# Wait for 10 seconds
 sleep 10
 
-# Beenden von Syncthing
+# Stopping Syncthing
 pkill syncthing
 
-# Activate autostart
-echo "Enabling Syncthing autostart..."
+# Make GUI available
+# File name
+file="path/to/your/file.txt"
 
-file_path="/etc/systemd/system/syncthing@.service"
-text_to_write="[Unit]
-Description=Syncthing - Open Source Continuous File Synchronization for %I
-After=network.target
+# Search pattern and replacement
+old_address="127.0.0.1:8384"
+new_address="00.0.0.0:8384"
 
-[Service]
-User=%I
-ExecStart=/usr/bin/syncthing -no-browser -no-restart -logflags=0
-Restart=on-failure
-SuccessExitStatus=3 4
-RestartForceExitStatus=3 4
-
-[Install]
-WantedBy=multi-user.target
-"
-
-# Check if the file exists, if not, create it
-if [ ! -f "$file_path" ]; then
-    sudo touch "$file_path"
-fi
-
-# Write text to the file
-echo "$text_to_write" > "$file_path"
-
-sudo systemctl daemon-reload
-
-sudo systemctl enable syncthing@administrator.service
-sudo systemctl start syncthing@administrator.service
-echo "Syncthing autostart enabled and started."
+# Use sed to replace the search pattern
+sed -i "s|<address>$old_address</address>|<address>$new_address</address>|g" "$file"
+echo "Created config files successfully"
