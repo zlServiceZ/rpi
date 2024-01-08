@@ -1,10 +1,9 @@
-git clone https://github.com/zlServiceZ/rpi.git
+Installation Script for [Syncthing](https://syncthing.net/)
 
-# Execute script
+Execute:
+git clone https://github.com/zlServiceZ/rpi.git
 chmod +x rpi/install_syncthing.sh
 rpi/install_syncthing.sh
 
-sudo rm -r ~/.config/syncthing
-sudo rm -r rpi
-sudo rm -r Sync
-sudo apt remove syncthing
+URL:
+localhost:8384
