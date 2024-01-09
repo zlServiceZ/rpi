@@ -1,26 +1,10 @@
 #!/bin/bash
 
 # Paketaktualisierung und Installation von Unbound
-wget https://nlnetlabs.nl/downloads/unbound/unbound-latest.tar.gz
-tar xzf unbound-latest.tar.gz
-sudo rm -r unbound-latest.tar.gz
-cd unbound*
-
 sudo apt update
 sudo apt upgrade -y
-sudo apt install libssl-dev -y
-sudo apt install libexpat1-dev -y
-# sudo apt install -y nghttp2
-sudo apt install -y build-essential
-sudo apt install -y bison
-sudo apt install -y flex
-sudo apt install libnghttp2-dev
-
-
-./configure --with-libnghttp2
-make
-sudo make install
-
+sudo apt install unbound -y
+sudo apt-get install -y nghttp2
 
 # Erstellen der Konfigurationsdatei als Root-Benutzer
 sudo bash -c "cat <<EOF > /etc/unbound/unbound.conf.d/pihole.conf
