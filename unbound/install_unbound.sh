@@ -8,14 +8,7 @@ cd unbound*
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install libssl-dev -y
-sudo apt install libexpat1-dev -y
-# sudo apt install -y nghttp2
-sudo apt install -y build-essential
-sudo apt install -y bison
-sudo apt install -y flex
-sudo apt install libnghttp2-dev
-
+sudo apt install -y libssl-dev libexpat1-dev build-essential bison flex libnghttp2-dev
 
 ./configure --with-libnghttp2
 make
@@ -24,6 +17,7 @@ sudo make install
 # generate ssl certificates
 source "$HOME/rpi/tools/generate_certs.sh"
 
+# ToDo: vorher überprüfen, ob die Datei exisitert, vlt eigenes scirpt schreiben, welches so etwas allgemein überprüft und überall anwenden
 # Konfiguration für DoH in Unbound
 sudo sh -c 'cat << EOF > /usr/local/etc/unbound/unbound.conf
 server:
