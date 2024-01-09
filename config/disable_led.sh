@@ -7,3 +7,6 @@ dtparam=act_led_trigger=default-on # The default
 dtparam=act_led_activelow=off"
 
 echo "$text_to_append" | sudo tee -a /boot/config.txt > /dev/null
+
+# reboot is necessary
+source "$HOME/rpi/tools/restart.sh"
