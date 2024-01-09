@@ -34,10 +34,7 @@ EOF'
 
 # Aktivieren von DoH in Unbound
 sudo sed -i 's/# http-port:/http-port: 443/' /usr/local/etc/unbound/unbound.conf
-
-# Starten von Unbound
-sudo systemctl start unbound
-
+sudo unbound
 
 # Erstellen der Konfigurationsdatei als Root-Benutzer
 sudo bash -c "cat <<EOF > /etc/unbound/unbound.conf.d/pihole.conf
@@ -117,8 +114,6 @@ else
     echo "edns-packet-max=1232" | sudo tee -a /etc/dnsmasq.d/99-edns.conf
 fi
 
-sudo service unbound restart
-
 # Überprüfen, ob das Schreiben erfolgreich war
 if [ $? -eq 0 ]; then
     echo "Konfigurationsdatei wurde erfolgreich erstellt."
@@ -169,6 +164,30 @@ else
     echo "Datei setupVars.conf nicht vorhanden"
 fi
 
+# Create the systemd service file
+sudo nano /etc/systemd/system/unbound.service <<EOF
+[Unit]
+Description=Unbound
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=sudo unbound
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Reload systemd to read the new service file
+sudo systemctl daemon-reload
+
+# Enable and start the service
+sudo systemctl enable unbound
+sudo systemctl start unbound
 
 sudo pihole restartdns
 
