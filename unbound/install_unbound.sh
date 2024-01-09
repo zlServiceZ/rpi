@@ -21,6 +21,23 @@ sudo apt install libnghttp2-dev
 make
 sudo make install
 
+# generate ssl certificates
+source "$HOME/rpi/tools/generate_certs.sh"
+
+# Konfiguration für DoH in Unbound
+sudo sh -c 'cat << EOF > /usr/local/etc/unbound/unbound.conf
+server:
+    interface: 127.0.0.1@443
+    tls-service-key: "/etc/ssl/certs/key.pem"
+    tls-service-pem: "/etc/ssl/certs/cert.pem"
+EOF'
+
+# Aktivieren von DoH in Unbound
+sudo sed -i 's/# http-port:/http-port: 443/' /usr/local/etc/unbound/unbound.conf
+
+# Starten von Unbound
+sudo systemctl start unbound
+
 
 # Erstellen der Konfigurationsdatei als Root-Benutzer
 sudo bash -c "cat <<EOF > /etc/unbound/unbound.conf.d/pihole.conf
