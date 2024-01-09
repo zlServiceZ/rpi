@@ -10,11 +10,11 @@ sudo usermod -aG docker $USER
 
 systemd.unified_cgroup_hierarchy=false
 
-sudo bash -c 'cat << EOF > /etc/default/grub
+sudo bash -c 'cat << EOF >> /etc/default/grub
 systemd.unified_cgroup_hierarchy=false
 EOF'
 
-sudo bash -c 'cat << EOF > /boot/cmdline.txt
+sudo bash -c 'cat << EOF >> /boot/cmdline.txt
 systemd.unified_cgroup_hierarchy=false apparmor=1 security=apparmor
 EOF'
 

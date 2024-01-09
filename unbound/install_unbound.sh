@@ -6,10 +6,6 @@ tar xzf unbound-latest.tar.gz
 sudo rm -r unbound-latest.tar.gz
 cd unbound*
 
-./configure
-make
-sudo make install
-
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y libssl-dev libexpat1-dev build-essential bison flex libnghttp2-dev
@@ -34,6 +30,8 @@ sudo unbound
 
 # Überprüfen, ob schon vorhnaden
 # Erstellen der Konfigurationsdatei als Root-Benutzer
+sudo mkdir /etc/unbound
+sudo mkdir /etc/unbound/unbound.conf.d
 sudo bash -c "cat << EOF > /etc/unbound/unbound.conf.d/pi-hole.conf
 server:
     # If no logfile is specified, syslog is used
