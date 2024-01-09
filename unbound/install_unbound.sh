@@ -19,7 +19,7 @@ source "$HOME/rpi/tools/generate_certs.sh"
 
 # ToDo: vorher überprüfen, ob die Datei exisitert, vlt eigenes scirpt schreiben, welches so etwas allgemein überprüft und überall anwenden
 # Konfiguration für DoH in Unbound
-sudo sh -c 'cat << EOF > /usr/local/etc/unbound/unbound.conf
+sudo bash -c 'cat << EOF > /usr/local/etc/unbound/unbound.conf
 server:
     interface: 127.0.0.1@443
     tls-service-key: "/etc/ssl/certs/key.pem"
@@ -30,8 +30,9 @@ EOF'
 sudo sed -i 's/# http-port:/http-port: 443/' /usr/local/etc/unbound/unbound.conf
 sudo unbound
 
+# Überprüfen, ob schon vorhnaden
 # Erstellen der Konfigurationsdatei als Root-Benutzer
-sudo bash -c "cat <<EOF > /etc/unbound/unbound.conf.d/pi-hole.conf
+sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf << EOF
 server:
     # If no logfile is specified, syslog is used
     # logfile: \"/var/log/unbound/unbound.log\"
@@ -98,7 +99,7 @@ server:
     private-address: 10.0.0.0/8
     private-address: fd00::/8
     private-address: fe80::/10
-EOF"
+EOF
 
 # signal FTL to adhere to this limit.
 if grep -qxF "edns-packet-max=1232" /etc/dnsmasq.d/99-edns.conf; then
@@ -159,8 +160,6 @@ else
 fi
 
 # solve problem when systemd-resolv is blocking port 53
-sudo nano /etc/systemd/resolved.conf
-
 # Check if resolved.conf exists
 if [ -f "/etc/systemd/resolved.conf" ]; then
     # Uncomment DNS and DNSStubListener lines, change values
@@ -173,7 +172,7 @@ fi
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 # Create the systemd service file
-sudo nano /etc/systemd/system/unbound.service <<EOF
+sudo nano /etc/systemd/system/unbound.service << EOF
 [Unit]
 Description=Unbound
 Wants=network.target
