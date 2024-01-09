@@ -98,7 +98,7 @@ if [ -f /etc/pihole/setupVars.conf ]; then
     # Überprüfe und bearbeite PIHOLE_DNS_1
     if grep -q "^PIHOLE_DNS_1=" /etc/pihole/setupVars.conf; then
         if ! grep -q "^PIHOLE_DNS_1=127.0.0.1#5353" /etc/pihole/setupVars.conf; then
-            sed -i 's/^PIHOLE_DNS_1=.*/PIHOLE_DNS_1=127.0.0.1#5353/' /etc/pihole/setupVars.conf
+            sudo bash -c "sed -i 's/^PIHOLE_DNS_1=.*/PIHOLE_DNS_1=127.0.0.1#5353/' /etc/pihole/setupVars.conf"
             echo "PIHOLE_DNS_1 auf 127.0.0.1#5353 geändert"
         else
             echo "PIHOLE_DNS_1 ist bereits auf 127.0.0.1#5353 gesetzt"
