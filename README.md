@@ -42,3 +42,10 @@ sudo rm -r rpi
 
 ---
 
+git clone https://github.com/zlServiceZ/rpi.git  
+chmod +x rpi/tools/generate_certs.sh  
+rpi/tools/generate_certs.sh
+sudo rm -r rpi 
+
+---
+
