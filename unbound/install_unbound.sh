@@ -31,7 +31,7 @@ sudo sed -i 's/# http-port:/http-port: 443/' /usr/local/etc/unbound/unbound.conf
 sudo unbound
 
 # Erstellen der Konfigurationsdatei als Root-Benutzer
-sudo bash -c "cat <<EOF > /etc/unbound/unbound.conf.d/pihole.conf
+sudo bash -c "cat <<EOF > /etc/unbound/unbound.conf.d/pi-hole.conf
 server:
     # If no logfile is specified, syslog is used
     # logfile: \"/var/log/unbound/unbound.log\"
@@ -158,6 +158,20 @@ else
     echo "Datei setupVars.conf nicht vorhanden"
 fi
 
+# solve problem when systemd-resolv is blocking port 53
+sudo nano /etc/systemd/resolved.conf
+
+# Check if resolved.conf exists
+if [ -f "/etc/systemd/resolved.conf" ]; then
+    # Uncomment DNS and DNSStubListener lines, change values
+    sudo sed -i 's/^#DNS=/DNS='"192.168.0.3"'/; s/^#DNSStubListener=yes/DNSStubListener=no/' "/etc/systemd/resolved.conf"
+    echo "Changes made to /etc/systemd/resolved.conf"
+else
+    echo "File /etc/systemd/resolved.conf not found. Please check if the file exists."
+fi
+
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
 # Create the systemd service file
 sudo nano /etc/systemd/system/unbound.service <<EOF
 [Unit]
@@ -185,3 +199,5 @@ sudo systemctl start unbound
 
 sudo pihole restartdns
 
+# reboot is necessary
+source "$HOME/rpi/tools/restart.sh"
