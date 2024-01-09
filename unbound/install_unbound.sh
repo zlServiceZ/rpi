@@ -6,6 +6,10 @@ tar xzf unbound-latest.tar.gz
 sudo rm -r unbound-latest.tar.gz
 cd unbound*
 
+./configure
+make
+sudo make install
+
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y libssl-dev libexpat1-dev build-essential bison flex libnghttp2-dev
@@ -26,13 +30,11 @@ server:
     tls-service-pem: "/etc/ssl/certs/cert.pem"
 EOF'
 
-# Aktivieren von DoH in Unbound
-sudo sed -i 's/# http-port:/http-port: 443/' /usr/local/etc/unbound/unbound.conf
 sudo unbound
 
 # Überprüfen, ob schon vorhnaden
 # Erstellen der Konfigurationsdatei als Root-Benutzer
-sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf << EOF
+sudo bash -c "cat << EOF > /etc/unbound/unbound.conf.d/pi-hole.conf
 server:
     # If no logfile is specified, syslog is used
     # logfile: \"/var/log/unbound/unbound.log\"
@@ -99,7 +101,7 @@ server:
     private-address: 10.0.0.0/8
     private-address: fd00::/8
     private-address: fe80::/10
-EOF
+EOF"
 
 # signal FTL to adhere to this limit.
 if grep -qxF "edns-packet-max=1232" /etc/dnsmasq.d/99-edns.conf; then
@@ -160,19 +162,15 @@ else
 fi
 
 # solve problem when systemd-resolv is blocking port 53
-# Check if resolved.conf exists
-if [ -f "/etc/systemd/resolved.conf" ]; then
-    # Uncomment DNS and DNSStubListener lines, change values
-    sudo sed -i 's/^#DNS=/DNS='"192.168.0.3"'/; s/^#DNSStubListener=yes/DNSStubListener=no/' "/etc/systemd/resolved.conf"
-    echo "Changes made to /etc/systemd/resolved.conf"
-else
-    echo "File /etc/systemd/resolved.conf not found. Please check if the file exists."
-fi
+# Uncomment DNS and DNSStubListener lines, change values
+sudo sed -i 's/^#DNS=/DNS='"192.168.0.3"'/; s/^#DNSStubListener=yes/DNSStubListener=no/' "/etc/systemd/resolved.conf"
+echo "Changes made to /etc/systemd/resolved.conf"
+
 
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 # Create the systemd service file
-sudo nano /etc/systemd/system/unbound.service << EOF
+sudo bash -c "cat << EOF > /etc/systemd/system/unbound.service
 [Unit]
 Description=Unbound
 Wants=network.target
@@ -187,7 +185,7 @@ KillMode=process
 
 [Install]
 WantedBy=multi-user.target
-EOF
+EOF"
 
 # Reload systemd to read the new service file
 sudo systemctl daemon-reload
