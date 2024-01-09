@@ -9,13 +9,12 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 
 systemd.unified_cgroup_hierarchy=false
-/etc/default/grub
 
 sudo sh -c 'cat << EOF > /etc/default/grub
 systemd.unified_cgroup_hierarchy=false
 EOF'
 
-sudo sh -c 'cat << EOF > sudo nano /boot/cmdline.txt
+sudo sh -c 'cat << EOF > /boot/cmdline.txt
 systemd.unified_cgroup_hierarchy=false apparmor=1 security=apparmor
 EOF'
 
@@ -29,6 +28,9 @@ gdbus introspect --system --dest io.hass.os --object-path /io/hass/os
 wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
 sudo dpkg -i homeassistant-supervised.deb
 sudo rm -r homeassistant-supervised.deb
+
+wget -O homeassistant-supervised.deb https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
+apt install ./homeassistant-supervised.deb
 
 # fix the errors you will get during the installation
 sudo apt --fix-broken install -y
