@@ -79,8 +79,7 @@ EOF"
 if grep -qxF "edns-packet-max=1232" /etc/dnsmasq.d/99-edns.conf; then
     echo "Der Eintrag edns-packet-max=1232 existiert bereits in der Datei."
 else
-    echo "Der Eintrag edns-packet-max=1232 existiert nicht in der Datei."
-    # Hinzufügen des Eintrags, falls er noch nicht existiert
+  # Hinzufügen des Eintrags, falls er noch nicht existiert
     echo "edns-packet-max=1232" | sudo tee -a /etc/dnsmasq.d/99-edns.conf
 fi
 
@@ -92,6 +91,48 @@ if [ $? -eq 0 ]; then
 else
     echo "Fehler beim Erstellen der Konfigurationsdatei."
 fi
+
+
+# Überprüfe, ob die Datei setupVars.conf existiert
+if [ -f /etc/pihole/setupVars.conf ]; then
+    # Überprüfe und bearbeite PIHOLE_DNS_1
+    if grep -q "^PIHOLE_DNS_1=" /etc/pihole/setupVars.conf; then
+        if ! grep -q "^PIHOLE_DNS_1=127.0.0.1#5353" /etc/pihole/setupVars.conf; then
+            sed -i 's/^PIHOLE_DNS_1=.*/PIHOLE_DNS_1=127.0.0.1#5353/' /etc/pihole/setupVars.conf
+            echo "PIHOLE_DNS_1 auf 127.0.0.1#5353 geändert"
+        else
+            echo "PIHOLE_DNS_1 ist bereits auf 127.0.0.1#5353 gesetzt"
+        fi
+    else
+        echo "PIHOLE_DNS_1=127.0.0.1#5353" >> /etc/pihole/setupVars.conf
+        echo "PIHOLE_DNS_1 mit Wert 127.0.0.1#5353 erstellt"
+    fi
+
+    # Überprüfe und bearbeite DNS_FQDN_REQUIRED
+    if grep -q "^DNS_FQDN_REQUIRED=false" /etc/pihole/setupVars.conf; then
+        sed -i 's/^DNS_FQDN_REQUIRED=false/DNS_FQDN_REQUIRED=true/' /etc/pihole/setupVars.conf
+        echo "DNS_FQDN_REQUIRED von false auf true geändert"
+    elif ! grep -q "^DNS_FQDN_REQUIRED=" /etc/pihole/setupVars.conf; then
+        echo "DNS_FQDN_REQUIRED=true" >> /etc/pihole/setupVars.conf
+        echo "DNS_FQDN_REQUIRED=true erstellt"
+    else
+        echo "DNS_FQDN_REQUIRED ist bereits vorhanden"
+    fi
+
+    # Überprüfe und bearbeite DNS_BOGUS_PRIV
+    if grep -q "^DNS_BOGUS_PRIV=false" /etc/pihole/setupVars.conf; then
+        sed -i 's/^DNS_BOGUS_PRIV=false/DNS_BOGUS_PRIV=true/' /etc/pihole/setupVars.conf
+        echo "DNS_BOGUS_PRIV von false auf true geändert"
+    elif ! grep -q "^DNS_BOGUS_PRIV=" /etc/pihole/setupVars.conf; then
+        echo "DNS_BOGUS_PRIV=true" >> /etc/pihole/setupVars.conf
+        echo "DNS_BOGUS_PRIV=true erstellt"
+    else
+        echo "DNS_BOGUS_PRIV ist bereits vorhanden"
+    fi
+else
+    echo "Datei setupVars.conf nicht vorhanden"
+fi
+
 
 sudo pihole restartdns
 
