@@ -1,7 +1,3 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt upgrade -y
-
-sudo apt install certbot
-sudo certbot certonly --standalone -d rpi.local
+sudo openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/certs/key.pem -out /etc/ssl/certs/cert.pem -days 365 -nodes
