@@ -24,6 +24,8 @@ server:
     interface: 127.0.0.1@443
     tls-service-key: "/etc/ssl/certs/key.pem"
     tls-service-pem: "/etc/ssl/certs/cert.pem"
+    # disable user privilige protection
+    username: ""
 EOF'
 
 sudo unbound
@@ -159,12 +161,6 @@ else
     echo "Datei setupVars.conf nicht vorhanden"
 fi
 
-# solve problem when systemd-resolv is blocking port 53
-# Uncomment DNS and DNSStubListener lines, change values
-sudo sed -i 's/^#DNS=/DNS='"192.168.0.3"'/; s/^#DNSStubListener=yes/DNSStubListener=no/' "/etc/systemd/resolved.conf"
-echo "Changes made to /etc/systemd/resolved.conf"
-
-
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 # Create the systemd service file
@@ -191,6 +187,13 @@ sudo systemctl daemon-reload
 # Enable and start the service
 sudo systemctl enable unbound
 sudo systemctl start unbound
+
+sudo pihole restartdns
+
+# solve problem when systemd-resolv is blocking port 53
+# Uncomment DNS and DNSStubListener lines, change values
+sudo sed -i 's/^#DNS=/DNS='"192.168.0.3"'/; s/^#DNSStubListener=yes/DNSStubListener=no/' "/etc/systemd/resolved.conf"
+echo "Changes made to /etc/systemd/resolved.conf"
 
 sudo pihole restartdns
 
