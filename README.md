@@ -16,7 +16,7 @@ localhost:8384
 
 ---
 
-### Unbound: 
+### Unbound (with DoH): 
 git clone https://github.com/zlServiceZ/rpi.git  
 chmod +x rpi/unbound/install_unbound.sh  
 rpi/unbound/install_unbound.sh

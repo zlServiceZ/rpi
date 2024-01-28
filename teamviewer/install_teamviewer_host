@@ -1,0 +1,15 @@
+#!/bin/bash
+
+sudo apt update
+sudo apt upgrade -y
+
+wget https://download.teamviewer.com/download/linux/teamviewer-host_armhf.deb
+sudo dpkg -i teamviewer-host_armhf.deb
+sudo apt --fix-broken install -y
+
+echo "Please enter the password for teamviewer: "
+read -r teamviewer_password
+
+sudo teamviewer passwd "$teamviewer_password"
+
+sudo teamviewer info
