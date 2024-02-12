@@ -47,7 +47,7 @@ rpi/adguard_home/install_adguard_home.sh
 sudo rm -r rpi  
 
 #### URL:
-localhost:8384
+localhost:3000
 
 ---
 
