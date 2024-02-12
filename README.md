@@ -40,6 +40,17 @@ sudo rm -r rpi
 
 ---
 
+### AdGuard Home: 
+git clone https://github.com/zlServiceZ/rpi.git  
+chmod +x rpi/adguard_home/install_adguard_home.sh  
+rpi/adguard_home/install_adguard_home.sh  
+sudo rm -r rpi  
+
+#### URL:
+localhost:8384
+
+---
+
 ### Syncthing: 
 git clone https://github.com/zlServiceZ/rpi.git  
 chmod +x rpi/syncthing/install_syncthing.sh  
