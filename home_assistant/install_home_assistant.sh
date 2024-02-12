@@ -29,9 +29,6 @@ wget https://github.com/home-assistant/supervised-installer/releases/latest/down
 sudo dpkg -i homeassistant-supervised.deb
 sudo rm -r homeassistant-supervised.deb
 
-wget -O homeassistant-supervised.deb https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
-apt install ./homeassistant-supervised.deb
-
 # fix the errors you will get during the installation
 sudo apt --fix-broken install -y
 
