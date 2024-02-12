@@ -8,14 +8,14 @@ curl -fsSL get.docker.com | sh
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
-systemd.unified_cgroup_hierarchy=false
-
 sudo bash -c 'cat << EOF >> /etc/default/grub
 systemd.unified_cgroup_hierarchy=false
 EOF'
 
-sudo bash -c 'cat << EOF >> /boot/cmdline.txt
-systemd.unified_cgroup_hierarchy=false apparmor=1 security=apparmor
+sudo update-grub
+
+sudo bash -c 'cat << EOF >> /boot/firmware/cmdline.txt
+apparmor=1 security=apparmor
 EOF'
 
 # install os agent
