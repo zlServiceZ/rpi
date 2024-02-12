@@ -45,5 +45,8 @@ sudo bash -c "cat << EOF > $HOME/.kodi/userdata/advancedsettings.xml
 </advancedsettings>
 EOF"
 
+sudo apt install kodi-vfs-sftp
+sudo apt-get install kodi-inputstream-adaptive
+
 # reboot is necessary
 source "$HOME/rpi/tools/restart.sh"

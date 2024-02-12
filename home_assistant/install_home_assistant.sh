@@ -1,7 +1,20 @@
 #!/bin/bash
 
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-sudo apt-get install apparmor jq wget curl udisks2 libglib2.0-bin network-manager dbus systemd-journal-remote -y
+sudo apt install \
+apparmor \
+cifs-utils \
+curl \
+dbus \
+jq \
+libglib2.0-bin \
+lsb-release \
+network-manager \
+nfs-common \
+systemd-journal-remote \
+systemd-resolved \
+udisks2 \
+wget -y
 
 curl -fsSL get.docker.com | sh
 
@@ -12,10 +25,8 @@ sudo bash -c 'cat << EOF >> /etc/default/grub
 systemd.unified_cgroup_hierarchy=false
 EOF'
 
-sudo update-grub
-
 sudo bash -c 'cat << EOF >> /boot/firmware/cmdline.txt
-apparmor=1 security=apparmor
+ apparmor=1 security=apparmor
 EOF'
 
 # install os agent
@@ -24,9 +35,12 @@ sudo dpkg -i os-agent_1.6.0_linux_aarch64.deb
 sudo rm -r os-agent_1.6.0_linux_aarch64.deb
 gdbus introspect --system --dest io.hass.os --object-path /io/hass/os
 
+systemctl start systemd-journal-gatewayd.service
+systemctl start systemd-journal-gatewayd.socket
+
 # install home assistant supervised
-wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
-sudo dpkg -i homeassistant-supervised.deb
+wget -O homeassistant-supervised.deb https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
+sudo apt install ./homeassistant-supervised.deb
 sudo rm -r homeassistant-supervised.deb
 
 # fix the errors you will get during the installation
