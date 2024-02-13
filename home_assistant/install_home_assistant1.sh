@@ -16,11 +16,6 @@ systemd-resolved \
 udisks2 \
 wget -y
 
-curl -fsSL get.docker.com | sh
-
-sudo groupadd docker
-sudo usermod -aG docker $USER
-
 sudo bash -c 'cat << EOF >> /etc/default/grub
 systemd.unified_cgroup_hierarchy=false
 EOF'

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+curl -fsSL get.docker.com | sh
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
 # install os agent
 wget https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_aarch64.deb
 sudo dpkg -i os-agent_1.6.0_linux_aarch64.deb
