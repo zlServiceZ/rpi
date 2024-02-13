@@ -192,7 +192,15 @@ sudo pihole restartdns
 
 # solve problem when systemd-resolv is blocking port 53
 # Uncomment DNS and DNSStubListener lines, change values
-sudo sed -i 's/^#DNS=/DNS='"192.168.0.3"'/; s/^#DNSStubListener=yes/DNSStubListener=no/' "/etc/systemd/resolved.conf"
+if [ -f /etc/systemd/resolved.conf ]; then
+    sudo sed -i 's/^#DNS=/DNS='"192.168.0.3"'/; s/^#DNSStubListener=yes/DNSStubListener=no/' "/etc/systemd/resolved.conf"
+else
+    sudo bash -c "cat << EOF > /etc/systemd/resolved.conf
+DNS=192.168.0.3
+DNSStubListener=no
+EOF"
+fi
+
 echo "Changes made to /etc/systemd/resolved.conf"
 
 sudo pihole restartdns
