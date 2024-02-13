@@ -22,5 +22,3 @@ sudo rm -r homeassistant-supervised.deb
 # fix the errors you will get during the installation
 sudo apt --fix-broken install -y
 
-echo "Finally reboot and wait several minutes until HA is available at http://[your_IP]:8123"
-
