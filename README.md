@@ -43,6 +43,25 @@ sudo rm -r rpi
 
 ---
 
+### pi-hole: 
+git clone https://github.com/zlServiceZ/rpi.git  
+chmod +x rpi/pihole/install_pihole.sh  
+rpi/pihole/install_pihole.sh
+sudo rm -r rpi  
+
+#### Url:
+localhost/admin
+
+---
+
+### Unbound (with DoH): 
+git clone https://github.com/zlServiceZ/rpi.git  
+chmod +x rpi/unbound/install_unbound.sh  
+rpi/unbound/install_unbound.sh
+sudo rm -r rpi  
+
+---
+
 ### AdGuard Home: 
 git clone https://github.com/zlServiceZ/rpi.git  
 chmod +x rpi/adguard_home/install_adguard_home.sh  
@@ -64,24 +83,3 @@ sudo rm -r rpi
 localhost:8384
 
 ---
-
-### pi-hole: 
-git clone https://github.com/zlServiceZ/rpi.git  
-chmod +x rpi/pihole/install_pihole.sh  
-rpi/pihole/install_pihole.sh
-sudo rm -r rpi  
-
-#### Url:
-localhost/admin
-
----
-
-### Unbound (with DoH): 
-git clone https://github.com/zlServiceZ/rpi.git  
-chmod +x rpi/unbound/install_unbound.sh  
-rpi/unbound/install_unbound.sh
-sudo rm -r rpi  
-
----
-
-
