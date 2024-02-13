@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # install os agent
 wget https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_aarch64.deb
 sudo dpkg -i os-agent_1.6.0_linux_aarch64.deb
@@ -18,10 +17,5 @@ sudo rm -r homeassistant-supervised.deb
 # fix the errors you will get during the installation
 sudo apt --fix-broken install -y
 
-echo "kernel=kernel8.img" | sudo tee -a /boot/firmware/config.txt > /dev/null
-
 echo "Finally reboot and wait several minutes until HA is available at http://[your_IP]:8123"
-
-# reboot is necessary
-source "$HOME/rpi/tools/restart.sh"
 

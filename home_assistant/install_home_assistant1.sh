@@ -28,3 +28,7 @@ EOF'
 sudo bash -c 'cat << EOF >> /boot/firmware/cmdline.txt
  apparmor=1 security=apparmor
 EOF'
+
+echo "kernel=kernel8.img" | sudo tee -a /boot/firmware/config.txt > /dev/null
+
+source "$HOME/rpi/tools/restart.sh"

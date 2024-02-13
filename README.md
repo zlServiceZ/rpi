@@ -23,8 +23,11 @@ sudo rm -r rpi
 
 ### Home Assistant Supervisor: 
 git clone https://github.com/zlServiceZ/rpi.git  
-chmod +x rpi/home_assistant/install_home_assistant.sh  
-rpi/home_assistant/install_home_assistant.sh
+chmod +x rpi/home_assistant/install_home_assistant1.sh  
+chmod +x rpi/home_assistant/install_home_assistant2.sh 
+rpi/home_assistant/install_home_assistant1.sh
+# reboot
+rpi/home_assistant/install_home_assistant2.sh
 sudo rm -r rpi  
 
 #### Url:
