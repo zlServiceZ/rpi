@@ -4,7 +4,7 @@ sudo apt update
 sudo apt upgrade -y
 
 # install kodi
-sudo apt install kodi
+sudo apt install kodi -y
 
 # enable web interface
 sudo bash -c "cat << EOF > $HOME/.kodi/userdata/guisettings.xml
