@@ -47,6 +47,3 @@ EOF"
 
 sudo apt install kodi-vfs-sftp -y
 sudo apt-get install kodi-inputstream-adaptive -y
-
-# reboot is necessary
-source "$HOME/rpi/tools/restart.sh"

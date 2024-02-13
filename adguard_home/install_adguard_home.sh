@@ -15,6 +15,3 @@ EOF'
 sudo mv /etc/resolv.conf /etc/resolv.conf.backup
 sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo systemctl reload-or-restart systemd-resolved
-
-# reboot is necessary
-source "$HOME/rpi/tools/restart.sh"
