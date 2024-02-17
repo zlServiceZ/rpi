@@ -54,18 +54,18 @@ localhost/admin
 
 ---
 
-### OpenMediaVault: 
-git clone https://github.com/zlServiceZ/rpi.git  
-chmod +x rpi/openmediavault/install_openmediavault.sh  
-rpi/openmediavault/install_openmediavault.sh
-sudo rm -r rpi  
-
----
-
 ### Unbound (with DoH): 
 git clone https://github.com/zlServiceZ/rpi.git  
 chmod +x rpi/unbound/install_unbound.sh  
 rpi/unbound/install_unbound.sh
+sudo rm -r rpi  
+
+---
+
+### OpenMediaVault: 
+git clone https://github.com/zlServiceZ/rpi.git  
+chmod +x rpi/openmediavault/install_openmediavault.sh  
+rpi/openmediavault/install_openmediavault.sh
 sudo rm -r rpi  
 
 ---
