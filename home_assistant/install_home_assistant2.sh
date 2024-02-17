@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+
 curl -fsSL get.docker.com | sh
 
 sudo groupadd docker

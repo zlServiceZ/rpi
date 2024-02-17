@@ -24,8 +24,15 @@ server:
     interface: 127.0.0.1@443
     tls-service-key: "/etc/ssl/certs/key.pem"
     tls-service-pem: "/etc/ssl/certs/cert.pem"
-    # disable user privilige protection
+    # disable user privilege protection
     username: ""
+
+python:
+
+dynlib:
+
+remote-control:
+
 EOF'
 
 sudo unbound
